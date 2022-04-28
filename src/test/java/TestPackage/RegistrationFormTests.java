@@ -2,14 +2,14 @@ package TestPackage;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.Month;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
 
 public class RegistrationFormTests {
 
@@ -52,9 +52,9 @@ public class RegistrationFormTests {
         $("#hobbiesWrapper").$(byText(hobby2)).click();
         $("#subjectsInput").setValue(subject);
         $("#currentAddress").setValue(address);
-        $("[id=state]").click(); // Выбор государства
+        $("[id=state]").click();
         $(byText(state)).click();
-        $("[id=city]").click(); // Выбор государства
+        $("[id=city]").click();
         $(byText(city)).click();
 
 
