@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,24 @@ import java.io.File;
 import java.time.Month;
 
 public class RegistrationFormTests {
+
+    Faker faker = new Faker();
+
+    String firstName = faker.name().firstName();
+    String lastName = faker.name().lastName();
+    String email = faker.internet().emailAddress();
+    String gender = "Female";
+    String number = faker.phoneNumber().subscriberNumber(10);
+    String year = Integer.toString(faker.number().numberBetween(1980, 2010));
+    int month = faker.number().numberBetween(0, 11);
+    String day = "17";
+    String hobby1 = "Sports";
+    String hobby2 = "Reading";
+    String subject = "Math";
+    String address = faker.address().fullAddress();
+    String state = "Haryana";
+    String city = "Panipat";
+    String pictureName = "2.png";
 
     @BeforeAll
     static void setUp(){
@@ -38,23 +57,8 @@ public class RegistrationFormTests {
 
     @Test
     void fillFormTest(){
-        Selenide.open("/automation-practice-form");
 
-        String firstName = "Maria";
-        String lastName = "Dolgopolova";
-        String email = "maria@test.com";
-        String gender = "Female";
-        String number = "7777777777";
-        String year = "1998";
-        int month = 6;
-        String day = "30";
-        String hobby1 = "Sports";
-        String hobby2 = "Reading";
-        String subject = "Math";
-        String address = "Moscow, Lenina, 12";
-        String state = "Haryana";
-        String city = "Panipat";
-        String pictureName = "2.png";
+        Selenide.open("/automation-practice-form");
 
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
@@ -66,7 +70,7 @@ public class RegistrationFormTests {
         $(".react-datepicker__year-select").selectOptionByValue(year);
         //  $(byText(day)).click();
         //  $(".react-datepicker__day--017:not(.react-datepicker__day--outside-month)").click();
-        $x("//div[not(contains(@class , 'react-datepicker__day--outside-month'))][text()='30']").click();
+        $x("//div[not(contains(@class , 'react-datepicker__day--outside-month'))][text()='17']").click();
         $("#hobbiesWrapper").$(byText(hobby1)).click();
         $("#hobbiesWrapper").$(byText(hobby2)).click();
         //  $("#uploadPicture").uploadFile(new File("src/test/resources/img/2.png"));
