@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.format;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -79,19 +80,22 @@ public class RegistrationFormTests {
         $("[id=city]").click();
         $(byText(city)).click();
 
-
         $("#submit").click();
 
-        $(".table").shouldHave(text(firstName + " " + lastName),
+        String fullName = format("%s %s", firstName, lastName);
+        String bith = format("%s %s,%s", day, Month.of(month+1), year);
+        String addr = format("%s %s", state, city);
+
+        $(".table").shouldHave(text(fullName),
                 text(email),
                 text(gender),
                 text(number),
-                text(day + " " + Month.of(month+1) + "," + year),
+                text(bith),
                 text(hobby1),
                 text(hobby2),
                 text(subject),
                 text(address),
-                text(state + " " + city),
+                text(addr),
                 text(pictureName));
     }
 }
