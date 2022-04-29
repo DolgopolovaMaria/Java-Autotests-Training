@@ -5,10 +5,12 @@ import com.codeborne.selenide.Selenide;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.time.Month;
 
 public class RegistrationFormTests {
@@ -21,6 +23,19 @@ public class RegistrationFormTests {
     }
 
     @Test
+    void appearance(){
+        Selenide.open("/automation-practice-form");
+
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        $("#genterWrapper").shouldHave(text("Male"),
+                text("Female"),
+                text("Other"));
+        $("#hobbiesWrapper").shouldHave(text("Sports"),
+                text("Reading"),
+                text("Music"));
+    }
+
+    @Test
     void fillFormTest(){
         Selenide.open("/automation-practice-form");
 
@@ -29,15 +44,16 @@ public class RegistrationFormTests {
         String email = "maria@test.com";
         String gender = "Female";
         String number = "7777777777";
-        int year = 1998;
-        int month = 5;
-        int day = 17;
+        String year = "1998";
+        int month = 6;
+        String day = "30";
         String hobby1 = "Sports";
         String hobby2 = "Reading";
-        String subject = "Programmaing";
+        String subject = "Math";
         String address = "Moscow, Lenina, 12";
         String state = "Haryana";
         String city = "Panipat";
+        String pictureName = "2.png";
 
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
@@ -46,11 +62,17 @@ public class RegistrationFormTests {
         $("#userNumber").setValue(number);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption(month);
-        $(".react-datepicker__year-select").selectOptionByValue(Integer.toString(year));
-        $(byText(Integer.toString(day))).click();
+        $(".react-datepicker__year-select").selectOptionByValue(year);
+        //  $(byText(day)).click();
+        //  $(".react-datepicker__day--017:not(.react-datepicker__day--outside-month)").click();
+        $x("//div[not(contains(@class , 'react-datepicker__day--outside-month'))][text()='30']").click();
         $("#hobbiesWrapper").$(byText(hobby1)).click();
         $("#hobbiesWrapper").$(byText(hobby2)).click();
-        $("#subjectsInput").setValue(subject);
+        //  $("#uploadPicture").uploadFile(new File("src/test/resources/img/2.png"));
+        $("#uploadPicture").uploadFromClasspath("img/" + pictureName);
+        //  $("#subjectsInput").setValue(subject);
+        $("#subjectsInput").setValue(subject).pressEnter();
+
         $("#currentAddress").setValue(address);
         $("[id=state]").click();
         $(byText(state)).click();
@@ -69,8 +91,7 @@ public class RegistrationFormTests {
                 text(hobby2),
                 text(subject),
                 text(address),
-                text(state + " " + city));
-
-
+                text(state + " " + city),
+                text(pictureName));
     }
 }
