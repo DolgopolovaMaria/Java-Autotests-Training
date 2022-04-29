@@ -1,4 +1,4 @@
-package TestPackage;
+package TestPackage.Tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
