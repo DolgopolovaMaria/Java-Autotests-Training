@@ -7,6 +7,8 @@ import static java.lang.String.format;
 
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.Random;
 
+@DisplayName("Тесты для формы регистрации")
 public class RegistrationFormTests {
 
     Faker faker = new Faker();
@@ -54,6 +57,7 @@ public class RegistrationFormTests {
         Configuration.browserSize = "1920x1080";
     }
 
+    @DisplayName("Заполнение всех полей валидными значениями") // for Allure integration
     @Test
     void fillFormTest() {
         RegistrationFormPage registrationFormPage = new RegistrationFormPage();
@@ -83,5 +87,23 @@ public class RegistrationFormTests {
                 .checkResult("Picture", pictureName)
                 .checkResult("Address", address)
                 .checkResult("State and City", fullAddress);
+    }
+
+    @Disabled
+    @DisplayName("Заполнение только обязательных полей валидными значениями")
+    @Test
+    void fillFormTestOnlyRequiredFields() {
+        RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+
+        registrationFormPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setMobile(number)
+                .submit();
+
+        registrationFormPage.checkResult("Student Name", fullName)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", number);
     }
 }
