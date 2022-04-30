@@ -10,6 +10,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -89,7 +92,7 @@ public class RegistrationFormTests {
                 .checkResult("State and City", fullAddress);
     }
 
-    @Disabled
+    // @Disabled
     @DisplayName("Заполнение только обязательных полей валидными значениями")
     @Test
     void fillFormTestOnlyRequiredFields() {
@@ -105,5 +108,46 @@ public class RegistrationFormTests {
         registrationFormPage.checkResult("Student Name", fullName)
                 .checkResult("Gender", gender)
                 .checkResult("Mobile", number);
+    }
+
+    @DisplayName("Ввод разных валидных дат")
+    @ParameterizedTest(name = "{0} {1} {2}")
+    @CsvSource({
+            "1, JANUARY, 2000",
+            "30, JULY, 1998",
+            "29, FEBRUARY, 2016"})
+    void fillDatesTest(String dayParam, String monthParam, String yearParam) {
+        String birthParam = format("%s %s,%s", dayParam, monthParam, yearParam);
+
+        RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+
+        registrationFormPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setMobile(number)
+                .setBirthDate(dayParam, monthParam, yearParam)
+                .submit();
+
+        registrationFormPage.checkResult("Date of Birth", birthParam);
+    }
+
+    @DisplayName("Ввод разных валидных номеров телефона")
+    @ParameterizedTest(name = "{0}")
+    @ValueSource(strings = {
+            "1234567890",
+            "0000000000",
+            "9712999999"})
+    void fillPhoneTest(String numberParam) {
+        RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+
+        registrationFormPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setMobile(numberParam)
+                .submit();
+
+        registrationFormPage.checkResult("Mobile", numberParam);
     }
 }
