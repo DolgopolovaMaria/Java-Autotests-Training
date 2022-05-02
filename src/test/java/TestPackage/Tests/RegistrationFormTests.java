@@ -5,7 +5,9 @@ import com.codeborne.selenide.Configuration;
 
 import static java.lang.String.format;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +21,7 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.Random;
 
+@Disabled
 @DisplayName("Тесты для формы регистрации")
 public class RegistrationFormTests {
 
@@ -60,6 +63,7 @@ public class RegistrationFormTests {
         Configuration.browserSize = "1920x1080";
     }
 
+    @Disabled
     @DisplayName("Заполнение всех полей валидными значениями") // for Allure integration
     @Test
     void fillFormTest() {
@@ -92,10 +96,12 @@ public class RegistrationFormTests {
                 .checkResult("State and City", fullAddress);
     }
 
-    // @Disabled
+    //@Disabled
     @DisplayName("Заполнение только обязательных полей валидными значениями")
     @Test
     void fillFormTestOnlyRequiredFields() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
         RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
         registrationFormPage.openPage()
@@ -110,6 +116,7 @@ public class RegistrationFormTests {
                 .checkResult("Mobile", number);
     }
 
+    @Disabled
     @DisplayName("Ввод разных валидных дат")
     @ParameterizedTest(name = "{0} {1} {2}")
     @CsvSource({
@@ -131,7 +138,8 @@ public class RegistrationFormTests {
 
         registrationFormPage.checkResult("Date of Birth", birthParam);
     }
-
+    
+    @Disabled
     @DisplayName("Ввод разных валидных номеров телефона")
     @ParameterizedTest(name = "{0}")
     @ValueSource(strings = {

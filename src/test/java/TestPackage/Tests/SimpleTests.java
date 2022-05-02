@@ -2,6 +2,7 @@ package TestPackage.Tests;
 
 import org.junit.jupiter.api.*;
 
+@Disabled
 public class SimpleTests {
     @BeforeAll
     static void initDB(){
