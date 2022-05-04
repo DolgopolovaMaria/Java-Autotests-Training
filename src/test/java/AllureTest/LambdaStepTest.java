@@ -25,6 +25,7 @@ import io.qameta.allure.Story;
 
 import java.nio.charset.StandardCharsets;
 
+@Disabled
 @DisplayName("[LAMBDA] Тесты для гитхаба")
 public class LambdaStepTest {
 

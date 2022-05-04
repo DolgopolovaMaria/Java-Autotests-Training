@@ -63,7 +63,7 @@ public class RegistrationFormTests {
         Configuration.browserSize = "1920x1080";
     }
 
-    @Disabled
+    //@Disabled
     @DisplayName("Заполнение всех полей валидными значениями") // for Allure integration
     @Test
     void fillFormTest() {
@@ -96,7 +96,7 @@ public class RegistrationFormTests {
                 .checkResult("State and City", fullAddress);
     }
 
-    //@Disabled
+    @Disabled
     @DisplayName("Заполнение только обязательных полей валидными значениями")
     @Test
     void fillFormTestOnlyRequiredFields() {
@@ -139,7 +139,7 @@ public class RegistrationFormTests {
         registrationFormPage.checkResult("Date of Birth", birthParam);
     }
     
-    @Disabled
+    // @Disabled
     @DisplayName("Ввод разных валидных номеров телефона")
     @ParameterizedTest(name = "{0}")
     @ValueSource(strings = {

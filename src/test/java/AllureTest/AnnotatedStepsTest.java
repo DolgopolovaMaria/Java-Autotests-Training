@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 @DisplayName("[ANNOTATED] Тесты для гитхаба")
 public class AnnotatedStepsTest {
 
