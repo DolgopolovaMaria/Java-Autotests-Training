@@ -21,7 +21,7 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.Random;
 
-@Disabled
+//@Disabled
 @DisplayName("Тесты для формы регистрации")
 public class RegistrationFormTests {
 
@@ -58,7 +58,7 @@ public class RegistrationFormTests {
 
     @BeforeAll
     static void setUp() {
-        Configuration.holdBrowserOpen = true;
+        //Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
     }
@@ -67,6 +67,7 @@ public class RegistrationFormTests {
     @DisplayName("Заполнение всех полей валидными значениями") // for Allure integration
     @Test
     void fillFormTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
         registrationFormPage.openPage()
@@ -139,7 +140,7 @@ public class RegistrationFormTests {
         registrationFormPage.checkResult("Date of Birth", birthParam);
     }
     
-    // @Disabled
+    @Disabled
     @DisplayName("Ввод разных валидных номеров телефона")
     @ParameterizedTest(name = "{0}")
     @ValueSource(strings = {

@@ -3,6 +3,7 @@ package TestPackage.Pages;
 import TestPackage.Pages.Components.CalendarComponent;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -29,6 +30,7 @@ public class RegistrationFormPage {
     SelenideElement submitButton = $("#submit");
 
     // actions
+    @Step("Открываем главную страницу")
     public RegistrationFormPage openPage(){
         Selenide.open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
