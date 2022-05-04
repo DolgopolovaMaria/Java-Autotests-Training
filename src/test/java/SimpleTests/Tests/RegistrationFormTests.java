@@ -1,6 +1,6 @@
-package TestPackage.Tests;
+package SimpleTests.Tests;
 
-import TestPackage.Pages.RegistrationFormPage;
+import SimpleTests.Pages.RegistrationFormPage;
 import com.codeborne.selenide.Configuration;
 
 import static java.lang.String.format;
@@ -17,7 +17,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.ZoneId;
 import java.util.Random;
 

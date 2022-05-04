@@ -1,6 +1,6 @@
-package TestPackage.Pages;
+package SimpleTests.Pages;
 
-import TestPackage.Pages.Components.CalendarComponent;
+import SimpleTests.Pages.Components.CalendarComponent;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

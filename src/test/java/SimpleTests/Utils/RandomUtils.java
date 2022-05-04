@@ -1,4 +1,4 @@
-package TestPackage.Utils;
+package SimpleTests.Utils;
 
 import java.util.Random;
 

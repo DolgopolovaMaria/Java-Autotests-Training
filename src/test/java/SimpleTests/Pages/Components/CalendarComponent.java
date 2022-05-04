@@ -1,9 +1,6 @@
-package TestPackage.Pages.Components;
-
-import java.util.Locale;
+package SimpleTests.Pages.Components;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class CalendarComponent {
     public void setDate(String day, String month, String year){

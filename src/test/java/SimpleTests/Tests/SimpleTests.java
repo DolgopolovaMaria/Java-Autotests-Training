@@ -1,4 +1,4 @@
-package TestPackage.Tests;
+package SimpleTests.Tests;
 
 import org.junit.jupiter.api.*;
 
