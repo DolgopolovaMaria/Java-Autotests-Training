@@ -30,7 +30,7 @@ public class RegistrationFormPage {
     SelenideElement submitButton = $("#submit");
 
     // actions
-    @Step("Открываем главную страницу")
+    @Step("Open registration form")
     public RegistrationFormPage openPage(){
         Selenide.open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));

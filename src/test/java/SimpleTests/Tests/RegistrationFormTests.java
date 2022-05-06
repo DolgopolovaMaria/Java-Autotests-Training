@@ -3,19 +3,25 @@ package SimpleTests.Tests;
 import SimpleTests.Pages.RegistrationFormPage;
 import com.codeborne.selenide.Configuration;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static io.qameta.allure.Allure.step;
 import static java.lang.String.format;
+import static org.openqa.selenium.logging.LogType.BROWSER;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Random;
@@ -62,6 +68,29 @@ public class RegistrationFormTests {
         Configuration.browserSize = "1920x1080";
     }
 
+    @Attachment(value = "Last screenshot", type = "image/png")
+    public static byte[] attachScreenshot() {
+        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(value = "Page source", type = "text/plain")
+    public static byte[] attachPageSource() {
+        return getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
+    }
+
+    @Attachment(value = "Browser console logs", type = "text/plain")
+    public static String attachBrowserConsoleLogs() {
+        return String.join("\n", Selenide.getWebDriverLogs(BROWSER));
+    }
+
+    @AfterEach
+    void addAttachments(){
+        attachScreenshot();
+        attachPageSource();
+        attachBrowserConsoleLogs();
+        closeWebDriver();
+    }
+
     //@Disabled
     @DisplayName("Заполнение всех полей валидными значениями") // for Allure integration
     @Test
@@ -69,31 +98,36 @@ public class RegistrationFormTests {
         SelenideLogger.addListener("allure", new AllureSelenide());
         RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
-        registrationFormPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .setGender(gender)
-                .setMobile(number)
-                .setBirthDate(day, month, year)
-                .setHobby(hobby1).setHobby(hobby2).setHobby(hobby3)
-                .setSubjects(subjects)
-                .setPicture("img/" + pictureName)
-                .setCurrentAddress(address)
-                .setState(state).setCity(city)
-                .submit();
+        step("Open and fill registration form", () -> {
+            registrationFormPage.openPage()
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setEmail(email)
+                    .setGender(gender)
+                    .setMobile(number)
+                    .setBirthDate(day, month, year)
+                    .setHobby(hobby1).setHobby(hobby2).setHobby(hobby3)
+                    .setSubjects(subjects)
+                    .setPicture("img/" + pictureName)
+                    .setCurrentAddress(address)
+                    .setState(state).setCity(city)
+                    .submit();
+        });
 
-        registrationFormPage.checkResult("Student Name", fullName)
-                .checkResult("Student Email", email)
-                .checkResult("Gender", gender)
-                .checkResult("Mobile", number)
-                .checkResult("Date of Birth", birth)
-                .checkResult("Subjects", subjects)
-                .checkResult("Hobbies", hobby1)
-                .checkResult("Hobbies", hobby2)
-                .checkResult("Picture", pictureName)
-                .checkResult("Address", address)
-                .checkResult("State and City", fullAddress);
+        step("Verify form data", () ->
+        {
+            registrationFormPage.checkResult("Student Name", fullName)
+                    .checkResult("Student Email", email)
+                    .checkResult("Gender", gender)
+                    .checkResult("Mobile", number)
+                    .checkResult("Date of Birth", birth)
+                    .checkResult("Subjects", subjects)
+                    .checkResult("Hobbies", hobby1)
+                    .checkResult("Hobbies", hobby2)
+                    .checkResult("Picture", pictureName)
+                    .checkResult("Address", address)
+                    .checkResult("State and City", fullAddress);
+        });
     }
 
     @Disabled
