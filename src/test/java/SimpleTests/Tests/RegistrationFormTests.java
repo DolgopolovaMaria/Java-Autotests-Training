@@ -26,7 +26,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Random;
 
-//@Disabled
+@Disabled
 @DisplayName("Тесты для формы регистрации")
 public class RegistrationFormTests {
 
@@ -63,10 +63,10 @@ public class RegistrationFormTests {
 
     @BeforeAll
     static void setUp() {
-        //Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        //Configuration.browserSize = "1920x1280";
+        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @Attachment(value = "Last screenshot", type = "image/png")
