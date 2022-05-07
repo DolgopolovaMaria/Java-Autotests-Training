@@ -20,7 +20,7 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
-    systemProperties(System.getProperties())
+    //systemProperties(System.getProperties())
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
@@ -66,6 +66,12 @@ test {
 task test5(type: Test){
     useJUnitPlatform{
         includeTags "test5"
+    }
+}
+
+task owner(type: Test) {
+    useJUnitPlatform{
+        includeTags "owner"
     }
     testLogging {
         lifecycle {
