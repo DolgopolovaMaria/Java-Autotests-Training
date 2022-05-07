@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class PropertiesTests {
 
-    //  Это плохой подход. Надо делать как в OwnerTests
     @Disabled
     @Test
     @Tag("test5")
