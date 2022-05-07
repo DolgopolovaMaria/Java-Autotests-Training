@@ -1,10 +1,13 @@
 package PropertiesTest;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class PropertiesTests {
 
+    //  Это плохой подход. Надо делать как в OwnerTests
+    @Disabled
     @Test
     @Tag("test5")
     void someTest() {
