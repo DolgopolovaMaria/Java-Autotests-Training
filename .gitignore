@@ -173,7 +173,7 @@ gradle-app.setting
 .gradletasknamecache
 
 # creds
-credentials.properties
+*.properties
 
 # Eclipse Gradle plugin generated files
 # Eclipse Core
