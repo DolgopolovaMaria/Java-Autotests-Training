@@ -80,3 +80,9 @@ task owner(type: Test) {
         }
     }
 }
+
+task simple(type: Test){
+    useJUnitPlatform{
+        includeTags "simple"
+    }
+}
