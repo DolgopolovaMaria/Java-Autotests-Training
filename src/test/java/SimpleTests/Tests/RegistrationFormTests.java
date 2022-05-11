@@ -26,9 +26,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Random;
 
-@Disabled
+//@Disabled
 @DisplayName("Тесты для формы регистрации")
-public class RegistrationFormTests {
+public class RegistrationFormTests extends TestBase {
 
     Faker faker = new Faker();
     Random random = new Random();
@@ -60,37 +60,6 @@ public class RegistrationFormTests {
     String fullName = format("%s %s", firstName, lastName);
     String birth = format("%s %s,%s", day, month, year);
     String fullAddress = format("%s %s", state, city);
-
-    @BeforeAll
-    static void setUp() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.baseUrl = "https://demoqa.com";
-        //Configuration.browserSize = "1920x1280";
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-    }
-
-    @Attachment(value = "Last screenshot", type = "image/png")
-    public static byte[] attachScreenshot() {
-        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
-    }
-
-    @Attachment(value = "Page source", type = "text/plain")
-    public static byte[] attachPageSource() {
-        return getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
-    }
-
-    @Attachment(value = "Browser console logs", type = "text/plain")
-    public static String attachBrowserConsoleLogs() {
-        return String.join("\n", Selenide.getWebDriverLogs(BROWSER));
-    }
-
-    @AfterEach
-    void addAttachments(){
-        attachScreenshot();
-        attachPageSource();
-        attachBrowserConsoleLogs();
-        closeWebDriver();
-    }
 
     //@Disabled
     @DisplayName("Заполнение всех полей валидными значениями") // for Allure integration

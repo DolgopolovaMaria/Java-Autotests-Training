@@ -2,9 +2,11 @@ package PropertiesTest;
 
 import config.CredentialsConfig;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public class OwnerTests {
     CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
     @Tag("owner")
