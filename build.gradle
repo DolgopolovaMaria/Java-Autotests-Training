@@ -67,6 +67,11 @@ task test5(type: Test){
     useJUnitPlatform{
         includeTags "test5"
     }
+    systemProperties = [
+            "browser": "firefox",
+            "version": "99",
+            "browserSize": "300x300"
+    ]
 }
 
 task owner(type: Test) {

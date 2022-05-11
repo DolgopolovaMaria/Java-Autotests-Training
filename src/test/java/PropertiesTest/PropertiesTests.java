@@ -6,11 +6,10 @@ import org.junit.jupiter.api.Test;
 
 public class PropertiesTests {
 
-    @Disabled
+    //@Disabled
     @Test
     @Tag("test5")
     void someTest() {
-        System.out.println("browser");
         String browser = System.getProperty("browser", "chrome");
         String version = System.getProperty("version", "100");
         String browserSize = System.getProperty("browserSize", "1920x1080");
