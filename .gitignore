@@ -175,6 +175,8 @@ gradle-app.setting
 # creds
 *.properties
 
+telegram.json
+
 # Eclipse Gradle plugin generated files
 # Eclipse Core
 # JDT-specific (Eclipse Java Development Tools)
